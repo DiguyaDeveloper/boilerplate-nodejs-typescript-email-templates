@@ -18,16 +18,15 @@ enum ResponseStatus {
 }
 
 abstract class ApiResponse {
-
   private static sanitize<T extends ApiResponse>(response: T): T {
     const clone: T = {} as T;
     Object.assign(clone, response);
     // @ts-ignore
     delete clone.status;
     for (const i in clone) {
-        if (typeof clone[i] === 'undefined') {
-            delete clone[i];
-        }
+      if (typeof clone[i] === 'undefined') {
+        delete clone[i];
+      }
     }
     return clone;
   }
@@ -42,7 +41,10 @@ abstract class ApiResponse {
     return this.prepare<ApiResponse>(res, this);
   }
 
-  protected prepare<T extends ApiResponse>(res: Response, response: T): Response {
+  protected prepare<T extends ApiResponse>(
+    res: Response,
+    response: T
+  ): Response {
     return res.status(this.status).json(ApiResponse.sanitize(response));
   }
 }
@@ -54,7 +56,6 @@ export class AuthFailureResponse extends ApiResponse {
 }
 
 export class NotFoundResponse extends ApiResponse {
-
   constructor(message: string = 'Not Found') {
     super(StatusCode.FAILURE, ResponseStatus.NOT_FOUND, message);
   }
@@ -108,7 +109,11 @@ export class AccessTokenErrorResponse extends ApiResponse {
   private instruction = 'refresh_token';
 
   constructor(message: string = 'Access token invalid') {
-    super(StatusCode.INVALID_ACCESS_TOKEN, ResponseStatus.UNAUTHORIZED, message);
+    super(
+      StatusCode.INVALID_ACCESS_TOKEN,
+      ResponseStatus.UNAUTHORIZED,
+      message
+    );
   }
 
   public send(res: Response): Response {

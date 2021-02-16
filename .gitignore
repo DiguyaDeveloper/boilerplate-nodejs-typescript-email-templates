@@ -10,7 +10,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
 .env
-.node_modules
 
 # OS generated files #
 .DS_Store
@@ -24,7 +23,7 @@ typings/
 # Dist #
 dist/
 tsconfig.build.json
-yarn
+
 # IDE #
 .idea/
 *.swp

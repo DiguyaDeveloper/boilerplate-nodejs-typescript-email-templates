@@ -46,7 +46,7 @@ export abstract class ApiError extends Error {
         let message = err.message;
         // Do not send failure message in production as it may send sensitive data
         if (env.node === 'production') {
-            message = 'Something wrong happened.';
+          message = 'Something wrong happened.';
         }
         return new InternalErrorResponse(message).send(res);
       }
@@ -85,7 +85,7 @@ export class ForbiddenError extends ApiError {
 }
 
 export class NoEntryError extends ApiError {
-  constructor(message: string = "Entry don't exists") {
+  constructor(message: string = 'Entry dont exists') {
     super(ErrorType.NO_ENTRY, message);
   }
 }
